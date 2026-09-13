@@ -135,22 +135,6 @@
   .factbox dt:first-child{margin-top:0;}
   .factbox dd{margin:3px 0 0;font-size:.92rem;}
 
-  /* ---- compare toggle (raw vs filtered) ---- */
-  .compare{margin-top:28px;}
-  .compare .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-  .tabbtn{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.03em;padding:8px 14px;border-radius:2px;border:1px solid var(--line-strong);background:var(--ground);color:var(--ink-soft);cursor:pointer;transition:all .2s;}
-  section.panel:nth-of-type(even) .tabbtn{background:var(--surface-2);}
-  .tabbtn.active{background:var(--ember);border-color:var(--ember);color:#fff;}
-  .stack{position:relative;border-radius:2px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);}
-  .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;}
-  .stack img.active{position:relative;opacity:1;}
-  .stack .spacer{width:100%;display:block;}
-
-  /* ---- year slider ---- */
-  .yearslide{margin-top:28px;}
-  .yearslide input[type=range]{width:100%;accent-color:var(--moss);margin-top:16px;}
-  .yearlabels{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ink-soft);margin-top:6px;}
-  .yearlabels span.active{color:var(--moss-deep);font-weight:700;}
 
   footer{background:#0d1314;color:#8b9c98;padding-block:48px;}
   footer .wrap{display:flex;flex-wrap:wrap;gap:38px;justify-content:space-between;}
@@ -339,19 +323,12 @@
     <div class="wrap reveal">
       <div class="eyebrow">07 · 2022 → 2024</div>
       <h2>Nature's return from the ashes</h2>
-      <p class="lede">Vegetation health (NBR) was tracked for three years, all symbolized on the <strong>same</strong> colour scale (-1 to 0.7) — using each year's own auto-stretched range would have let symbology differences masquerade as real recovery. Drag the slider to compare years directly.</p>
-      <div class="yearslide">
-        <div class="stack" id="yearStack" style="aspect-ratio:16/11">
-          <img class="active" data-year="2022" src="manavgat_iyilesme_2022.png" style="position:absolute;object-fit:cover;" alt="2022 vegetation condition">
-          <img data-year="2023" src="manavgat_iyilesme_2023.png" style="position:absolute;object-fit:cover;" alt="2023 vegetation condition">
-          <img data-year="2024" src="manavgat_iyilesme_2024.png" style="position:absolute;object-fit:cover;" alt="2024 vegetation condition">
-        </div>
-        <input type="range" id="yearRange" min="0" max="2" step="1" value="0" aria-label="Select recovery year">
-        <div class="yearlabels">
-          <span data-y="0" class="active">2022 — burn scar still dominant</span>
-          <span data-y="1">2023 — green cover expanding</span>
-          <span data-y="2">2024 — greenest of the three years</span>
-        </div>
+      <p class="lede">Vegetation health (NBR) was tracked for three years, all symbolized on the <strong>same</strong> colour scale (-1 to 0.7) — using each year's own auto-stretched range would have let symbology differences masquerade as real recovery.</p>
+      <figure><div class="frame"><img src="manavgat_iyilesme_zaman_serisi.gif" alt="Animation of vegetation recovery from 2022 to 2024"></div><figcaption><span class="fig-no">FIG. 7.1</span> Year-over-year NBR comparison, brown to green.</figcaption></figure>
+      <div class="three-col">
+        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2022.png" alt="2022 vegetation condition"></div><figcaption>2022 — brown, fire-affected ground still dominant.</figcaption></figure>
+        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2023.png" alt="2023 vegetation condition"></div><figcaption>2023 — green cover expanding.</figcaption></figure>
+        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2024.png" alt="2024 vegetation condition"></div><figcaption>2024 — greenest of the three years; recovery is slower in the highest-severity core.</figcaption></figure>
       </div>
     </div>
   </section>
@@ -360,20 +337,7 @@
     <div class="wrap reveal">
       <div class="eyebrow fire">08 · Future Fire Risk Model</div>
       <h2>Built only from what held up</h2>
-      <p class="lede">The model combines only <strong>aspect</strong> (50%) and <strong>vegetation density / fuel load</strong> (50%) — the two variables confirmed in Section 04. Toggle the layers below to see how they combine; the map covers the whole landscape, not just the historical burn scar.</p>
-      <div class="compare" style="margin-top:24px">
-        <div class="tabs">
-          <button class="tabbtn active" data-target="lyr-aspect">Aspect (50%)</button>
-          <button class="tabbtn" data-target="lyr-fuel">Fuel load / NDVI (50%)</button>
-          <button class="tabbtn" data-target="lyr-combined">Combined risk model</button>
-        </div>
-        <div class="stack" id="riskStack">
-          <img class="spacer" src="manavgat_layer_combined.png" style="opacity:0;position:static;" alt="">
-          <img id="lyr-aspect" class="active" src="manavgat_layer_aspect.png" alt="Aspect-only risk component, green low to red high">
-          <img id="lyr-fuel" src="manavgat_layer_fuel.png" alt="Vegetation density / fuel load risk component">
-          <img id="lyr-combined" src="manavgat_layer_combined.png" alt="Combined final risk model">
-        </div>
-      </div>
+      <p class="lede">The model combines only <strong>aspect</strong> (50%) and <strong>vegetation density / fuel load</strong> (50%) — the two variables confirmed in Section 04. It covers the whole landscape, not just the historical burn scar, so it also scores risk in forest that hasn't burned yet.</p>
       <figure>
         <div class="frame"><img src="manavgat_risk_screenshot.png" alt="Future wildfire risk map based on aspect and fuel load, over a topographic basemap"></div>
         <figcaption class="fire"><span class="fig-no">FIG. 8.1</span> Final model over a topographic basemap. Light yellow (low) to deep red (high). Version 4 — re-verified twice after methodology corrections.</figcaption>
@@ -459,19 +423,6 @@
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
   }
 
-  function wireTabs(containerSelector, stackId){
-    document.querySelectorAll(containerSelector + ' .tabbtn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        document.querySelectorAll(containerSelector + ' .tabbtn').forEach(function(b){ b.classList.remove('active'); });
-        btn.classList.add('active');
-        var target = btn.getAttribute('data-target');
-        document.querySelectorAll('#' + stackId + ' img').forEach(function(img){
-          if(img.id) img.classList.toggle('active', img.id === target);
-        });
-      });
-    });
-  }
-  wireTabs('#risk .compare', 'riskStack');
 
   // animated stat counters
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -503,16 +454,6 @@
     cio.observe(statline);
   }
 
-  var range = document.getElementById('yearRange');
-  var yearImgs = document.querySelectorAll('#yearStack img[data-year]');
-  var yearLabels = document.querySelectorAll('.yearlabels span');
-  if(range){
-    range.addEventListener('input', function(){
-      var idx = parseInt(range.value, 10);
-      yearImgs.forEach(function(img, i){ img.classList.toggle('active', i === idx); });
-      yearLabels.forEach(function(l){ l.classList.toggle('active', parseInt(l.getAttribute('data-y'),10) === idx); });
-    });
-  }
 })();
 </script>
 
