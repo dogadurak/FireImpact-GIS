@@ -19,16 +19,16 @@ The Manavgat fire of 2021 devastated over 60,000 hectares of forest. This projec
 ## 3D Spatial Visualization
 A 3D fly-through generated in ArcGIS Pro, providing a topographic perspective of the burn scars and the rugged terrain of the Taurus Mountains.
 
-<video src="manavgat_3b_ucus_web.mp4" width="100%" controls autoplay loop muted></video>
+<video src="assets/manavgat_3b_ucus_web.mp4" width="100%" controls autoplay loop muted></video>
 
 ## Burn Severity (dNBR) Map
-![Burn Severity](manavgat_dnbr_screenshot.png)
+![Burn Severity](assets/manavgat_dnbr_screenshot.png)
 
 ## Vegetation Recovery (2021-2024)
-![Vegetation Recovery](manavgat_iyilesme_zaman_serisi.gif)
+![Vegetation Recovery](assets/manavgat_iyilesme_zaman_serisi.gif)
 
 ## Future Risk Modeling
-![Future Risk Model](manavgat_risk_screenshot.png)
+![Future Risk Model](assets/manavgat_risk_screenshot.png)
 
 ---
 *Developed by Doğa Durak, Geomatics Engineer & GIS Analyst.*
