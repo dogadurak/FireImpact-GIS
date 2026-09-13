@@ -1,4 +1,6 @@
-<img width="1919" height="882" alt="image" src="https://github.com/user-attachments/assets/35b15de4-4c03-476c-bccb-52bf51b941f0" /><img width="1919" height="882" alt="image" src="https://github.com/user-attachments/assets/7ed890b9-d406-42ef-848e-17de7d34880a" /># FireImpact GIS: A Spatial Analysis of the Manavgat Forest Fire
+<img width="1919" height="882" alt="image" src="https://github.com/user-attachments/assets/35b15de4-4c03-476c-bccb-52bf51b941f0" />
+
+# FireImpact GIS: A Spatial Analysis of the Manavgat Forest Fire
 
 
 **[🌍 Explore the Interactive Analysis Portfolio Here](https://dogadurak.github.io/FireImpact-GIS/)**
