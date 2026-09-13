@@ -8,7 +8,9 @@ Projenin asıl vurgusu şurada: bir risk modeli veya etki tahmini üretmeden ön
 
 Kopernikus sayısal yükseklik modeli üzerine giydirilmiş dNBR şiddet haritası, Toros eteklerinden kıyıya inen bir kamera rotasıyla (ArcGIS Pro Local Scene + Animation ile üretildi).
 
-**[Videoyu izle →](#)** *(YouTube yüklemesi tamamlanınca link eklenecek)*
+<video src="https://github.com/dogadurak/FireImpact-GIS/raw/main/manavgat_3b_ucus_web.mp4" controls width="100%"></video>
+
+*(Video bu sayfada oynatılamıyorsa: [doğrudan indir/izle](https://github.com/dogadurak/FireImpact-GIS/raw/main/manavgat_3b_ucus_web.mp4))*
 
 ## Öne Çıkan Sayılar
 

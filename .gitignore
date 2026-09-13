@@ -40,8 +40,9 @@ Index/
 RasterFunctionTemplates/
 *.nc
 
-# Video (buyuk, GitHub'a degil YouTube'a yuklenecek)
+# Video (buyuk orijinal, GitHub'a yuklenmeyecek; sikistirilmis web versiyonu haric)
 *.mp4
+!manavgat_3b_ucus_web.mp4
 
 # Notion disa aktarimlari (kisisel calisma dosyalari, repo icin degil)
 *.zip
