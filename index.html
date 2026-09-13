@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Manavgat Wildfire Analysis — Doğa Durak</title>
+<title>FireImpact GIS — Doğa Durak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Libre+Franklin:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
@@ -59,16 +59,21 @@
   /* ---- HERO: full-bleed video ---- */
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;color:#f2efe6;border-bottom:1px solid rgba(231,235,230,.1);}
   .hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;will-change:transform;}
-  .hero .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(8,12,13,.35) 0%, rgba(8,12,13,.55) 55%, rgba(8,12,13,.92) 100%);}
-  .hero .content{position:relative;z-index:2;padding-bottom:36px;}
-  .byline{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:#c3ccc7;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:18px;}
-  .byline .name{color:#f2efe6;font-weight:600;}
-  .byline .dot{opacity:.5;}
-  .hero .eyebrow{color:#5fc2e6;} .hero .eyebrow::before{background:#5fc2e6;}
-  .hero h1{font-size:clamp(2.4rem,6.4vw,4.6rem);font-weight:600;line-height:1.02;margin-top:14px;color:#f6f2e8;text-shadow:0 2px 24px rgba(0,0,0,.4);}
-  .hero h1 em{font-style:italic;font-weight:500;color:#e8955f;}
-  .hero p.lede{max-width:58ch;font-size:1.08rem;color:#dcdfd9;margin-top:14px;}
-  .coord{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:#9fb0ad;margin-top:14px;letter-spacing:.02em;}
+  .hero .grade{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 900px 620px at 14% 8%, rgba(63,169,204,.4), transparent 62%),radial-gradient(ellipse 900px 700px at 90% 92%, rgba(184,70,31,.42), transparent 60%);mix-blend-mode:overlay;}
+  .hero .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(8,12,13,.3) 0%, rgba(8,12,13,.5) 50%, rgba(6,9,10,.94) 100%);}
+  .hero .content{position:relative;z-index:2;padding-bottom:40px;}
+  .byline{font-family:"JetBrains Mono",monospace;font-size:.86rem;font-weight:500;color:#d6dbd6;display:flex;flex-wrap:wrap;gap:7px 14px;align-items:center;margin-bottom:20px;opacity:0;animation:riseIn .8s .1s cubic-bezier(.2,.7,.2,1) forwards;}
+  .byline .name{color:#ffffff;font-weight:700;}
+  .byline .dot{opacity:.45;}
+  .hero .eyebrow{color:#6fd0f2;font-size:.78rem;opacity:0;animation:riseIn .8s .22s cubic-bezier(.2,.7,.2,1) forwards;} .hero .eyebrow::before{background:#6fd0f2;}
+  .hero h1{font-size:clamp(3rem,8.2vw,5.6rem);font-weight:600;line-height:.98;letter-spacing:-.01em;margin-top:16px;color:#fbf7ef;text-shadow:0 4px 32px rgba(0,0,0,.5);opacity:0;animation:riseIn .9s .34s cubic-bezier(.2,.7,.2,1) forwards;}
+  .hero h1 em{font-style:italic;font-weight:500;color:#f0a165;}
+  .hero p.lede{max-width:60ch;font-size:1.22rem;line-height:1.55;color:#eef0eb;margin-top:18px;opacity:0;animation:riseIn .9s .48s cubic-bezier(.2,.7,.2,1) forwards;}
+  .coord{font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:500;color:#b7c4bf;margin-top:18px;letter-spacing:.03em;opacity:0;animation:riseIn .9s .6s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes riseIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){
+    .byline,.hero .eyebrow,.hero h1,.hero p.lede,.coord{animation:none;opacity:1;}
+  }
   .scrolldown{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#c3ccc7;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2.2s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
   .scrolldown .ln{width:1px;height:22px;background:linear-gradient(180deg,#c3ccc7,transparent);}
@@ -83,8 +88,8 @@
   section.panel{padding-block:58px;border-bottom:1px solid var(--line);scroll-margin-top:20px;}
   section.panel:nth-of-type(even){background:var(--surface);}
   .panel h2{font-size:clamp(1.55rem,3.1vw,2.05rem);font-weight:600;margin-top:12px;max-width:24ch;}
-  .panel .lede{color:var(--ink-soft);font-size:1.02rem;max-width:66ch;margin-top:12px;}
-  .body-col{max-width:68ch;} .body-col p{margin:0 0 1.05em;} .body-col strong{color:var(--ink);}
+  .panel .lede{color:var(--ink-soft);font-size:1.08rem;line-height:1.6;max-width:66ch;margin-top:12px;}
+  .body-col{max-width:68ch;font-size:1.04rem;} .body-col p{margin:0 0 1.1em;} .body-col strong{color:var(--ink);}
 
   figure{margin:28px 0 0;}
   figure .frame{overflow:hidden;border-radius:2px;border:1px solid var(--line);box-shadow:var(--shadow);position:relative;}
@@ -172,6 +177,7 @@
 
 <header class="hero" id="top">
   <video class="bg" id="heroVideo" src="manavgat_3b_ucus_web.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="grade"></div>
   <div class="scrim"></div>
   <div class="content wrap">
     <div class="byline">
@@ -182,7 +188,7 @@
       <span>GIS &amp; Remote Sensing Analysis</span>
     </div>
     <div class="eyebrow">Manavgat, Antalya · July 28, 2021</div>
-    <h1>Anatomy of a<br><em>wildfire</em></h1>
+    <h1>FireImpact<br><em>GIS</em></h1>
     <p class="lede">A satellite-based spatial analysis of Turkey's largest recorded forest fire, built entirely in ArcGIS Pro — burn severity, human and carbon impact, vegetation recovery, and a future-risk model built only from variables that held up against the real 2021 burn data.</p>
     <div class="coord">36.78°N, 31.44°E &nbsp;·&nbsp; Sentinel-2 L2A, 10m &nbsp;·&nbsp; WGS 1984 UTM Zone 36N</div>
   </div>
