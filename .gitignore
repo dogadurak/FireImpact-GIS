@@ -16,6 +16,7 @@ venv.bak/
 # Antigravity ve yerel dosyalar
 manavgat_dnbr.png
 *.html
+!index.html
 
 # Ham/islenmis raster veriler (buyuk dosyalar, GitHub'a yuklenmeyecek)
 data/
