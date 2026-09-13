@@ -1,0 +1,49 @@
+# Ajanların kullandığı proje hafıza dosyası
+proje_adimlari.md
+
+# Python gizli dosyaları
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Antigravity ve yerel dosyalar
+manavgat_dnbr.png
+*.html
+
+# Ham/islenmis raster veriler (buyuk dosyalar, GitHub'a yuklenmeyecek)
+data/
+*.tif
+*.tif.ovr
+*.tif.aux.xml
+*.tif.xml
+*.tfw
+*.vat.dbf
+*.vat.cpg
+*.sr.lock
+
+# ArcGIS Pro proje dosyalari (kullaniciya ozel, buyuk binary)
+*.aprx
+*.gdb/
+*.atbx
+.backups/
+.pyHistory/
+GpMessages/
+ImportLog/
+Index/
+RasterFunctionTemplates/
+*.nc
+
+# Video (buyuk, GitHub'a degil YouTube'a yuklenecek)
+*.mp4
+
+# Notion disa aktarimlari (kisisel calisma dosyalari, repo icin degil)
+*.zip
+_notion_export/
+_notion_export2/
