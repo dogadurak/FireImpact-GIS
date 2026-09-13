@@ -20,6 +20,8 @@ if os.path.exists(dem0) and os.path.exists(dem1):
     dem = Raster(out_dem)
 elif os.path.exists(dem0):
     dem = Raster(dem0)
+elif os.path.exists(out_dem):
+    dem = Raster(out_dem)
 else:
     raise FileNotFoundError("DEM verisi bulunamadi!")
 
@@ -30,45 +32,42 @@ slope_raster.save(os.path.join(workspace, "Manavgat_Slope.tif"))
 aspect_raster = Aspect(dem)
 aspect_raster.save(os.path.join(workspace, "Manavgat_Aspect.tif"))
 
-print("3. Gelecek Yangin Riski Modeli Olusturuluyor...")
-# Egim Reclassify:
-# 0-15 derece: 1 (Dusuk)
-# 15-30 derece: 2 (Orta)
-# >30 derece: 3 (Yuksek)
+print("3. NDMI / Kuraklik Verisi Hazirlaniyor...")
+ndmi_path = os.path.join(workspace, "Recovery_Full_NBR_2024.tif")
+if os.path.exists(ndmi_path):
+    ndmi_raster = Raster(ndmi_path)
+else:
+    raise FileNotFoundError("Recovery_Full_NBR_2024.tif bulunamadi!")
+
+print("4. Gelecek Yangin Riski Modeli Olusturuluyor...")
 slope_reclass = Reclassify(slope_raster, "Value", 
                            RemapRange([[0, 15, 1], [15, 30, 2], [30, 90, 3]]))
 
-# Baki Reclassify:
-# Guney bakilar daha cok isinir ve kurur (Kuzey Yarimkurede).
-# Guneydogu (135), Guney (180), Guneybati (225)
-# 135 - 225 arasi: 3 (Yuksek Risk)
-# 90-135 ve 225-270: 2 (Orta Risk)
-# Diger: 1 (Dusuk Risk)
 aspect_reclass = Reclassify(aspect_raster, "Value", 
                             RemapRange([[-1, 90, 1], [90, 135, 2], [135, 225, 3], [225, 270, 2], [270, 360, 1]]))
 
-# Yangin Gecmisi / Bitki Ortusu:
-# Daha once yanan yerler 
-burn_severity = Raster(os.path.join(workspace, "dNBR_Full_Masked_Classified.tif"))
-# Yanan alanlari (2,3,4,5) bitki ortusu kalmadigi icin su anlik risk dusuk sayilabilir, 
-# ama biz genel model yapiyoruz, ormanin kalan saglam kisimlari tehlikede.
-# Basit model: Egim (Agirlik %50) + Baki (Agirlik %50)
-risk_model = (slope_reclass * 0.5) + (aspect_reclass * 0.5)
-risk_model_out = os.path.join(workspace, "Future_Fire_Risk.tif")
-risk_model.save(risk_model_out)
+ndmi_reclass = Reclassify(ndmi_raster, "Value",
+                          RemapRange([[-1.0, 0.1, 3], [0.1, 0.4, 2], [0.4, 1.0, 1]]))
 
-print("4. PNG Gorseller Uretiliyor...")
-# Convert to numpy array for fast plotting (subsample to save memory)
+arcpy.env.extent = ndmi_raster
+arcpy.env.cellSize = ndmi_raster
+
+risk_model = (slope_reclass * 0.35) + (aspect_reclass * 0.35) + (ndmi_reclass * 0.30)
+risk_model_integer = Int(risk_model + 0.5)
+
+risk_model_out = os.path.join(workspace, "Future_Fire_Risk_V2.tif")
+risk_model_integer.save(risk_model_out)
+
+print("5. PNG Gorseller Uretiliyor...")
 import numpy as np
 
-# Risk Haritasi PNG
-arr = arcpy.RasterToNumPyArray(risk_model, nodata_to_value=np.nan)
+arr = arcpy.RasterToNumPyArray(risk_model_integer, nodata_to_value=np.nan)
 plt.figure(figsize=(10, 6))
 plt.imshow(arr, cmap='RdYlGn_r')
 plt.colorbar(label='Risk Seviyesi (1: Dusuk, 3: Yuksek)')
 plt.title("Gelecek Yangin Riski ve Egilim Modeli (Manavgat)")
 plt.axis('off')
-out_png = r"C:\Users\PC\.gemini\antigravity-ide\brain\55ade938-5ad7-4095-a1eb-26368b356086\manavgat_gelecek_yangin_riski.png"
+out_png = r"C:\Users\PC\Desktop\projeler\FireImpact-GIS\manavgat_gelecek_yangin_riski_v2.png"
 plt.savefig(out_png, dpi=300, bbox_inches='tight')
 plt.close()
 
