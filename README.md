@@ -1,4 +1,6 @@
 # FireImpact GIS: A Spatial Analysis of the Manavgat Forest Fire
+![Uploading image.png…]()
+
 
 **[🌍 Explore the Interactive Analysis Portfolio Here](https://dogadurak.github.io/FireImpact-GIS/)**
 
