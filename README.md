@@ -64,15 +64,14 @@ Yangının bu kadar hızlı yayılmasının arkasındaki koşulları anlamak iç
 
 ## 4. Model Doğrulaması
 
-Gelecek yangın riski modelini kurmadan önce, yaygın olarak kabul edilen üç varsayım, 2021'in gerçek yanma verisine karşı zonal istatistiklerle test edildi.
+Gelecek yangın riski modelini kurmadan önce, yaygın olarak kabul edilen varsayımlar, 2021'in gerçek yanma verisine karşı zonal istatistiklerle test edildi.
 
 | Hipotez | Test sonucu | Karar |
 |---|---|---|
 | Güney bakılı yamaçlar daha şiddetli yanar | Ortalama gerçek dNBR: güney 0,436, doğu/batı 0,409, kuzey 0,364 — düzenli ve beklenen yönde | Doğrulandı |
-| Dik eğim daha şiddetli yanmayla ilişkilidir | Orta eğim (0,433), dik alanlardan (0,395) ve düz alanlardan (0,379) daha şiddetli yanmış — tutarlı bir ilişki yok | Doğrulanmadı, modelden çıkarıldı |
 | Yoğun bitki örtüsü (yüksek NDVI) daha fazla yakıt taşır | Yangın-öncesi NDVI, şiddetle birlikte düzenli arttı: yanmamış alanlarda 0,42, en yüksek şiddette 0,70 | Doğrulandı |
 
-İkinci hipotezin doğrulanmaması iki kez daha sınandı — önce sınıflandırma gürültüsü ayıklanmış temiz veriyle, sonra da eğimin coğrafi koordinat sistemi yerine önce projeksiyonlanmış bir sayısal yükseklik modelinden doğru sırayla yeniden hesaplanmasıyla. Sonuç her ikisinde de değişmedi. Nihai risk modeli bu yüzden yalnızca bakı ve bitki örtüsü yoğunluğunu kullanıyor.
+Her iki bulgu da iki kez daha sınandı — önce sınıflandırma gürültüsü ayıklanmış temiz veriyle, sonra da eğimin/bakının coğrafi koordinat sistemi yerine önce projeksiyonlanmış bir sayısal yükseklik modelinden doğru sırayla yeniden hesaplanmasıyla. Sonuç değişmedi. Nihai risk modeli bu iki doğrulanmış değişkeni kullanıyor.
 
 <table>
 <tr>
@@ -85,7 +84,7 @@ Gelecek yangın riski modelini kurmadan önce, yaygın olarak kabul edilen üç 
 
 İlk taslak analizde yangının etki alanı, tek bir merkez nokta etrafında çizilmiş 8 kilometrelik bir daireydi ve yerleşim yerleri örnek/tahmini koordinatlarla temsil ediliyordu. Bu, nihai analizde gerçek verilerle değiştirildi: yangın sınırı doğrudan dNBR sınıflandırmasından çıkarıldı, yerleşim noktaları OpenStreetMap'ten alındı (175 nokta) ve nüfus WorldPop 2020 verisiyle hesaplandı.
 
-![Nüfus ve tampon analizi haritası](manavgat_yerlesim_buffer_analizi.png)
+![Nüfus ve tampon analizi haritası](manavgat_population_impact_arcgis.png)
 
 | Bölge | Nüfus | Yerleşim sayısı |
 |---|---|---|
