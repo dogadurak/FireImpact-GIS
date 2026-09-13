@@ -8,19 +8,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Libre+Franklin:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --ground:#f2efe6;
-    --surface:#e7e3d4;
-    --surface-2:#dcd6c1;
-    --ink:#1c2226;
-    --ink-soft:#4d564f;
-    --ember:#b8461f;
-    --ember-deep:#5c1a0e;
-    --blue:#0b5d7a;
-    --blue-deep:#083f52;
-    --moss:#3f6b3a;
-    --moss-deep:#28491f;
-    --line:rgba(20,26,30,.15);
-    --line-strong:rgba(20,26,30,.32);
+    --ground:#f2efe6; --surface:#e7e3d4; --surface-2:#dcd6c1;
+    --ink:#1c2226; --ink-soft:#4d564f;
+    --ember:#b8461f; --ember-deep:#5c1a0e;
+    --blue:#0b5d7a; --blue-deep:#083f52;
+    --moss:#3f6b3a; --moss-deep:#28491f;
+    --line:rgba(20,26,30,.15); --line-strong:rgba(20,26,30,.32);
     --shadow:0 18px 40px -22px rgba(10,20,25,.35);
   }
   @media (prefers-color-scheme: dark){
@@ -54,54 +47,49 @@
   .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue);display:inline-block;}
   .eyebrow.fire{color:var(--ember);} .eyebrow.fire::before{background:var(--ember);}
 
-  /* ---- progress bar ---- */
-  #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--ember));width:0%;z-index:100;transition:width .1s linear;}
+  #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--ember));width:0%;z-index:200;transition:width .1s linear;}
 
-  /* ---- HERO with topo pattern ---- */
-  .hero{
-    position:relative;
-    overflow:hidden;
-    background:
-      radial-gradient(ellipse 700px 460px at 10% -10%, rgba(63,169,204,.3), transparent 58%),
-      radial-gradient(ellipse 820px 520px at 92% 4%, rgba(184,70,31,.34), transparent 60%),
-      linear-gradient(180deg,#0f1517,#0a0f10 78%);
-    color:#e7ebe6;
-    padding-block:52px 0;
-    border-bottom:1px solid rgba(231,235,230,.1);
-  }
-  .topo{position:absolute;inset:0;opacity:.16;pointer-events:none;z-index:0;}
-  .hero .wrap{position:relative;z-index:1;}
-  .byline{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:#9fb0ad;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:20px;}
-  .byline .name{color:#e7ebe6;font-weight:600;}
+  /* ---- floating nav ---- */
+  #floatnav{position:fixed;top:16px;right:16px;z-index:150;background:rgba(13,19,20,.72);backdrop-filter:blur(8px);border:1px solid rgba(231,235,230,.14);border-radius:3px;padding:8px;display:flex;gap:2px;flex-wrap:wrap;max-width:min(90vw,560px);opacity:0;transform:translateY(-8px);transition:opacity .4s, transform .4s;pointer-events:none;}
+  #floatnav.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+  #floatnav a{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:#9fb0ad;text-decoration:none;padding:6px 9px;border-radius:2px;white-space:nowrap;}
+  #floatnav a:hover{color:#e7ebe6;}
+  #floatnav a.active{color:#0d1314;background:#e8955f;}
+
+  /* ---- HERO: full-bleed video ---- */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;color:#f2efe6;border-bottom:1px solid rgba(231,235,230,.1);}
+  .hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;will-change:transform;}
+  .hero .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(8,12,13,.35) 0%, rgba(8,12,13,.55) 55%, rgba(8,12,13,.92) 100%);}
+  .hero .content{position:relative;z-index:2;padding-bottom:36px;}
+  .byline{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:#c3ccc7;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:18px;}
+  .byline .name{color:#f2efe6;font-weight:600;}
   .byline .dot{opacity:.5;}
   .hero .eyebrow{color:#5fc2e6;} .hero .eyebrow::before{background:#5fc2e6;}
-  .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;line-height:1.05;margin-top:14px;color:#f2efe6;}
+  .hero h1{font-size:clamp(2.4rem,6.4vw,4.6rem);font-weight:600;line-height:1.02;margin-top:14px;color:#f6f2e8;text-shadow:0 2px 24px rgba(0,0,0,.4);}
   .hero h1 em{font-style:italic;font-weight:500;color:#e8955f;}
-  .hero p.lede{max-width:62ch;font-size:1.06rem;color:#c3ccc7;margin-top:14px;}
-  .coord{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:#7f918d;margin-top:12px;letter-spacing:.02em;}
+  .hero p.lede{max-width:58ch;font-size:1.08rem;color:#dcdfd9;margin-top:14px;}
+  .coord{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:#9fb0ad;margin-top:14px;letter-spacing:.02em;}
+  .scrolldown{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#c3ccc7;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+  .scrolldown .ln{width:1px;height:22px;background:linear-gradient(180deg,#c3ccc7,transparent);}
 
-  .hero-video{margin-top:34px;position:relative;border-top:1px solid rgba(231,235,230,.12);padding-top:0;}
-  .hero-video video{width:100%;display:block;max-height:74vh;object-fit:cover;background:#000;}
-  .hero-video .tag{position:absolute;top:16px;left:24px;font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#f2efe6;background:rgba(10,15,16,.55);border:1px solid rgba(231,235,230,.25);padding:6px 11px;border-radius:2px;backdrop-filter:blur(4px);}
-  .hero-video .cap{padding:14px 24px 26px;font-size:.85rem;color:#9fb0ad;max-width:980px;margin:0 auto;}
-
-  .statline{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(231,235,230,.12);border-top:1px solid rgba(231,235,230,.12);border-bottom:1px solid rgba(231,235,230,.12);}
+  .statline{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(231,235,230,.1);border-top:1px solid rgba(231,235,230,.1);}
   .stat{background:#0d1314;padding:18px 24px;}
   .stat .n{font-family:"JetBrains Mono",monospace;font-size:1.42rem;font-weight:600;color:#e8955f;font-variant-numeric:tabular-nums;}
   .stat .l{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#8b9c98;margin-top:5px;}
-  .toolstrip{display:flex;flex-wrap:wrap;gap:8px;padding:22px 24px 30px;max-width:980px;margin:0 auto;}
+  .toolstrip{display:flex;flex-wrap:wrap;gap:8px;padding:22px 24px 26px;max-width:980px;margin:0 auto;background:#0d1314;}
   .tool-tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.03em;color:#a9d4e6;border:1px solid rgba(95,194,230,.35);background:rgba(95,194,230,.08);padding:5px 10px;border-radius:2px;}
 
-  section.panel{padding-block:58px;border-bottom:1px solid var(--line);}
+  section.panel{padding-block:58px;border-bottom:1px solid var(--line);scroll-margin-top:20px;}
   section.panel:nth-of-type(even){background:var(--surface);}
   .panel h2{font-size:clamp(1.55rem,3.1vw,2.05rem);font-weight:600;margin-top:12px;max-width:24ch;}
   .panel .lede{color:var(--ink-soft);font-size:1.02rem;max-width:66ch;margin-top:12px;}
   .body-col{max-width:68ch;} .body-col p{margin:0 0 1.05em;} .body-col strong{color:var(--ink);}
 
   figure{margin:28px 0 0;}
-  figure .frame{overflow:hidden;border-radius:2px;border:1px solid var(--line);box-shadow:var(--shadow);}
+  figure .frame{overflow:hidden;border-radius:2px;border:1px solid var(--line);box-shadow:var(--shadow);position:relative;}
   figure img{width:100%;transition:transform .5s cubic-bezier(.2,.7,.3,1);}
-  figure .frame:hover img{transform:scale(1.035);}
+  figure .frame:hover img{transform:scale(1.03);}
   figcaption{margin-top:11px;font-size:.85rem;color:var(--ink-soft);display:flex;gap:9px;align-items:baseline;}
   figcaption .fig-no{font-family:"JetBrains Mono",monospace;color:var(--blue);font-weight:600;flex:none;}
   figcaption.fire .fig-no{color:var(--ember);}
@@ -122,8 +110,7 @@
   @media (max-width:600px){.val-card{grid-template-columns:1fr;} .verdict{justify-self:start;}}
 
   .tile-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px;margin-top:30px;}
-  .tile{background:var(--ground);border:1px solid var(--line);border-radius:2px;padding:17px 19px;transition:border-color .2s;}
-  .tile:hover{border-color:var(--line-strong);}
+  .tile{background:var(--ground);border:1px solid var(--line);border-radius:2px;padding:17px 19px;}
   section.panel:nth-of-type(even) .tile{background:var(--surface-2);}
   .tile .n{font-family:"JetBrains Mono",monospace;font-size:1.42rem;font-weight:600;color:var(--ember);font-variant-numeric:tabular-nums;}
   .tile .l{font-size:.8rem;color:var(--ink-soft);margin-top:4px;}
@@ -141,6 +128,23 @@
   .factbox dt:first-child{margin-top:0;}
   .factbox dd{margin:3px 0 0;font-size:.92rem;}
 
+  /* ---- compare toggle (raw vs filtered) ---- */
+  .compare{margin-top:28px;}
+  .compare .tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+  .tabbtn{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.03em;padding:8px 14px;border-radius:2px;border:1px solid var(--line-strong);background:var(--ground);color:var(--ink-soft);cursor:pointer;transition:all .2s;}
+  section.panel:nth-of-type(even) .tabbtn{background:var(--surface-2);}
+  .tabbtn.active{background:var(--ember);border-color:var(--ember);color:#fff;}
+  .stack{position:relative;border-radius:2px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);}
+  .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;}
+  .stack img.active{position:relative;opacity:1;}
+  .stack .spacer{width:100%;display:block;}
+
+  /* ---- year slider ---- */
+  .yearslide{margin-top:28px;}
+  .yearslide input[type=range]{width:100%;accent-color:var(--moss);margin-top:16px;}
+  .yearlabels{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-soft);margin-top:6px;}
+  .yearlabels span.active{color:var(--moss-deep);font-weight:700;}
+
   footer{background:#0d1314;color:#8b9c98;padding-block:48px;}
   footer .wrap{display:flex;flex-wrap:wrap;gap:38px;justify-content:space-between;}
   footer h4{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#5fc2e6;margin:0 0 11px;}
@@ -148,32 +152,28 @@
   footer .credit{margin-top:36px;padding-top:22px;border-top:1px solid rgba(231,235,230,.1);font-size:.79rem;max-width:72ch;}
   footer a{color:#5fc2e6;}
 
-  /* ---- scroll reveal ---- */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);}
   .reveal.in{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1;transform:none;transition:none;}
     figure .frame:hover img{transform:none;}
+    .scrolldown{animation:none;}
   }
 </style>
 </head>
 <body>
 
 <div id="progress"></div>
+<nav id="floatnav">
+  <a href="#event">Event</a><a href="#severity">Severity</a><a href="#weather">Weather</a>
+  <a href="#validation">Validation</a><a href="#impact">Impact</a><a href="#carbon">Carbon</a>
+  <a href="#recovery">Recovery</a><a href="#risk">Risk</a>
+</nav>
 
-<header class="hero">
-  <svg class="topo" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <g fill="none" stroke="#5fc2e6" stroke-width="1">
-      <path d="M-20,120 C150,60 300,180 480,110 S760,60 900,140" />
-      <path d="M-20,180 C150,120 300,240 480,170 S760,120 900,200" opacity=".7"/>
-      <path d="M-20,240 C150,180 300,300 480,230 S760,180 900,260" opacity=".45"/>
-    </g>
-    <g fill="none" stroke="#e0723a" stroke-width="1">
-      <path d="M-20,320 C170,380 300,260 500,340 S760,400 900,330" />
-      <path d="M-20,370 C170,430 300,310 500,390 S760,450 900,380" opacity=".6"/>
-    </g>
-  </svg>
-  <div class="wrap">
+<header class="hero" id="top">
+  <video class="bg" id="heroVideo" src="manavgat_3b_ucus_web.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="scrim"></div>
+  <div class="content wrap">
     <div class="byline">
       <span class="name">Doğa Durak</span>
       <span class="dot">·</span>
@@ -183,39 +183,36 @@
     </div>
     <div class="eyebrow">Manavgat, Antalya · July 28, 2021</div>
     <h1>Anatomy of a<br><em>wildfire</em></h1>
-    <p class="lede">A satellite-based spatial analysis of Turkey's largest recorded forest fire — burn severity, human and carbon impact, vegetation recovery, and a future-risk model built only from variables that held up against the real 2021 burn data.</p>
+    <p class="lede">A satellite-based spatial analysis of Turkey's largest recorded forest fire, built entirely in ArcGIS Pro — burn severity, human and carbon impact, vegetation recovery, and a future-risk model built only from variables that held up against the real 2021 burn data.</p>
     <div class="coord">36.78°N, 31.44°E &nbsp;·&nbsp; Sentinel-2 L2A, 10m &nbsp;·&nbsp; WGS 1984 UTM Zone 36N</div>
   </div>
-  <div class="hero-video">
-    <span class="tag">3D flight over the burn scar — ArcGIS Pro</span>
-    <video src="manavgat_3b_ucus_web.mp4" controls preload="metadata" playsinline></video>
-    <p class="cap">dNBR severity draped over a Copernicus DEM in ArcGIS Pro's Local Scene, camera path animated from the Taurus foothills down to the coastline. ~57 seconds, silent.</p>
-  </div>
-  <div class="statline">
-    <div class="stat"><div class="n">60,128</div><div class="l">Hectares burned</div></div>
-    <div class="stat"><div class="n">~2.97M</div><div class="l">Tonnes CO₂ (estimate)</div></div>
-    <div class="stat"><div class="n">134,676</div><div class="l">People within 5 km</div></div>
-    <div class="stat"><div class="n">3</div><div class="l">Years of recovery tracked</div></div>
-  </div>
-  <div class="toolstrip">
-    <span class="tool-tag">ArcGIS Pro</span>
-    <span class="tool-tag">arcpy / Spatial Analyst</span>
-    <span class="tool-tag">Python</span>
-    <span class="tool-tag">Sentinel-2</span>
-    <span class="tool-tag">ArcGIS 3D Scenes</span>
-  </div>
+  <div class="scrolldown"><span>Explore the analysis</span><span class="ln"></span></div>
 </header>
+
+<div class="statline">
+  <div class="stat"><div class="n">60,128</div><div class="l">Hectares burned</div></div>
+  <div class="stat"><div class="n">~2.97M</div><div class="l">Tonnes CO₂ (estimate)</div></div>
+  <div class="stat"><div class="n">134,676</div><div class="l">People within 5 km</div></div>
+  <div class="stat"><div class="n">3</div><div class="l">Years of recovery tracked</div></div>
+</div>
+<div class="toolstrip">
+  <span class="tool-tag">ArcGIS Pro</span>
+  <span class="tool-tag">arcpy / Spatial Analyst</span>
+  <span class="tool-tag">Python</span>
+  <span class="tool-tag">Sentinel-2</span>
+  <span class="tool-tag">ArcGIS 3D Scenes</span>
+</div>
 
 <main>
 
-  <section class="panel">
+  <section class="panel" id="about">
     <div class="wrap reveal">
       <div class="eyebrow">About this analysis</div>
       <h2>Why Manavgat, and why this way</h2>
       <div class="about-grid">
         <div class="body-col" style="margin-top:22px">
           <p>On July 28, 2021, a wildfire broke out near Manavgat, on Turkey's Mediterranean coast in Antalya province, and burned for ten days — the largest forest fire in the country's recorded history. This is an independent case study built entirely in ArcGIS Pro, from raw Sentinel-2 imagery to a validated future-risk model.</p>
-          <p>The goal was not the most visually impressive map, but the most defensible one. Before building a risk model, every assumption that would normally go into one — terrain aspect, vegetation density — was tested against the real 2021 burn data using zonal statistics rather than taken on faith. That process is documented in full below.</p>
+          <p>The goal was not the most visually impressive map, but the most defensible one. Before building a risk model, every assumption that would normally go into one was tested against the real 2021 burn data using zonal statistics rather than taken on faith.</p>
         </div>
         <dl class="factbox">
           <dt>Location</dt><dd>Manavgat district, Antalya Province, Turkey</dd>
@@ -228,25 +225,36 @@
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="event">
     <div class="wrap reveal">
       <div class="eyebrow">01 · Scale of the Event</div>
       <h2>Ten days, one province, one record</h2>
       <div class="body-col" style="margin-top:22px">
-        <p>The fire burned for ten days and became the largest forest fire in the history of the Turkish Republic. This analysis maps its physical extent, the meteorological conditions that let it spread, its cost in human exposure and carbon emissions, three years of vegetation recovery, and a forward-looking risk model — each built from satellite data and cross-checked against independent sources rather than produced in isolation.</p>
-        <p>The burned-area figure (60,128 ha) was not taken directly from a classifier's output. The raw dNBR classification initially reported 103,447 hectares — well above the 56,663–75,000 ha range reported by an independent satellite study and the Antalya Regional Forestry Directorate. Investigation showed most of the excess was scattered false-positive pixels across Antalya's urban core and farmland (cloud shadow, harvest signal), not fire. Keeping only contiguous burned patches over 100 hectares brought the total to 60,128 ha — within the independently reported range.</p>
+        <p>The fire burned for ten days and became the largest forest fire in the history of the Turkish Republic. The burned-area figure below (60,128 ha) was not taken directly from a classifier's output — the raw classification initially reported 103,447 hectares, well above the 56,663–75,000 ha range reported by an independent satellite study and the Antalya Regional Forestry Directorate.</p>
       </div>
+      <div class="compare">
+        <div class="tabs">
+          <button class="tabbtn active" data-target="cmp-raw">Raw classification — 103,447 ha</button>
+          <button class="tabbtn" data-target="cmp-filtered">Filtered result — 60,128 ha</button>
+        </div>
+        <div class="stack" id="compareStack">
+          <img class="spacer" src="manavgat_raw_classification.png" style="opacity:0;position:static;" alt="">
+          <img id="cmp-raw" class="active" src="manavgat_raw_classification.png" alt="Raw dNBR classification showing scattered false-positive noise across Antalya province">
+          <img id="cmp-filtered" src="manavgat_filtered_classification.png" alt="Filtered classification showing only real fire patches over 100 hectares">
+        </div>
+      </div>
+      <div class="callout warn"><strong>What changed:</strong> most of the excess was scattered false-positive pixels across Antalya's urban core and farmland (cloud shadow, harvest signal), not fire. Keeping only contiguous patches over 100 hectares removed the noise while leaving the real fire complexes — including a few smaller, genuinely separate 2021 fires elsewhere in the province — intact.</div>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="severity">
     <div class="wrap reveal">
       <div class="eyebrow fire">02 · Burn Severity (dNBR)</div>
       <h2>Measuring destruction: from yellow to deep maroon</h2>
       <p class="lede">Burn severity was measured with the differenced Normalized Burn Ratio (dNBR), computed from Sentinel-2's near-infrared (B08) and shortwave-infrared (B12) bands, then classified against standard USGS severity thresholds.</p>
       <figure>
         <div class="frame"><img src="manavgat_dnbr_screenshot.png" alt="Manavgat wildfire dNBR severity map in ArcGIS Pro over a topographic basemap"></div>
-        <figcaption class="fire"><span class="fig-no">FIG. 2.1</span> dNBR severity classification over the actual burn scar. Colour scale, low to high: yellow, orange, red, maroon.</figcaption>
+        <figcaption class="fire"><span class="fig-no">FIG. 2.1</span> dNBR severity over the actual burn scar. Low to high: yellow, orange, red, maroon.</figcaption>
         <div class="credit-line">ArcGIS Pro — Map view, unique-values symbology on the classified raster.</div>
       </figure>
       <div class="tile-row">
@@ -255,15 +263,14 @@
         <div class="tile"><div class="n">12,391 ha</div><div class="l">Moderate-high severity</div></div>
         <div class="tile"><div class="n">14,128 ha</div><div class="l">High severity</div></div>
       </div>
-      <div class="callout warn"><strong>Data quality note:</strong> the raw classification contained 540,812 disconnected patches — most were false positives in Antalya's urban core and farmland (cloud shadow, harvest). Only contiguous patches over 100 hectares were counted as fire.</div>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="weather">
     <div class="wrap reveal">
       <div class="eyebrow">03 · Meteorological Context</div>
       <h2>An abnormally hot, typically dry Mediterranean summer</h2>
-      <p class="lede">Against the 2015–2020 baseline, the real anomaly was <strong>temperature</strong> (+1.8°C above average) — the rainfall difference (-0.8 mm) was statistically negligible. This is deliberately not called a "drought": the data doesn't support that word, so it isn't used. The dominant wind during the fire blew from the north, accelerating its spread toward the coast.</p>
+      <p class="lede">Against the 2015–2020 baseline, the real anomaly was <strong>temperature</strong> (+1.8°C above average) — the rainfall difference (-0.8 mm) was statistically negligible. This is deliberately not called a "drought": the data doesn't support that word. The dominant wind during the fire blew from the north, accelerating its spread toward the coast.</p>
       <div class="two-col">
         <figure>
           <div class="frame"><img src="manavgat_yangin_meteorolojisi.png" alt="Temperature and wind speed timeline around the fire"></div>
@@ -277,7 +284,7 @@
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="validation">
     <div class="wrap reveal">
       <div class="eyebrow">04 · Model Validation</div>
       <h2>Testing assumptions before trusting them</h2>
@@ -298,15 +305,15 @@
         <figure><div class="frame"><img src="manavgat_risk_model_dogrulama.png" alt="Mean dNBR by slope and aspect class"></div><figcaption><span class="fig-no">FIG. 4.1</span> Aspect class → mean real dNBR.</figcaption></figure>
         <figure><div class="frame"><img src="manavgat_ndvi_siddet_iliskisi.png" alt="Pre-fire NDVI versus real burn severity class"></div><figcaption><span class="fig-no">FIG. 4.2</span> Pre-fire NDVI → real severity class.</figcaption></figure>
       </div>
-      <div class="callout">Both findings held up under repeated testing — including a re-check after removing classification noise, and again after correcting the terrain model's projection order — so both went into the final risk model in Section 8.</div>
+      <div class="callout">Both findings held up under repeated re-testing — after removing classification noise, and again after correcting the terrain model's projection order — so both went into the final risk model in Section 08.</div>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="impact">
     <div class="wrap reveal">
       <div class="eyebrow fire">05 · Human Impact</div>
       <h2>134,676 people within 5 km of the fire</h2>
-      <p class="lede">Built from the real fire perimeter (extracted directly from the dNBR classification), 175 real settlement locations from OpenStreetMap, and WorldPop 2020 population data — not a placeholder radius around a single point.</p>
+      <p class="lede">Built from the real fire perimeter, 175 real settlement locations from OpenStreetMap, and WorldPop 2020 population data — not a placeholder radius around a single point.</p>
       <figure>
         <div class="frame"><img src="manavgat_population_impact_arcgis.png" alt="Map of the real fire boundary, distance buffers, and real settlement points around Manavgat"></div>
         <figcaption class="fire"><span class="fig-no">FIG. 5.1</span> 0–1 / 1–3 / 3–5 km impact buffers around the true fire perimeter, with real settlement locations.</figcaption>
@@ -321,36 +328,60 @@
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="carbon">
     <div class="wrap reveal">
       <div class="eyebrow">06 · Carbon Footprint</div>
       <h2>An estimated 2.97 million tonnes of CO₂</h2>
-      <p class="lede">Calculated with the IPCC's 2006 AFOLU method (area × biomass × combustion factor × emission factor). Biomass was not assumed from a generic literature range — it was measured for this specific forest from ESA CCI Biomass's 2020 satellite product.</p>
+      <p class="lede">Calculated with the IPCC's 2006 AFOLU method. Biomass was not assumed from a generic literature range — it was measured for this specific forest from ESA CCI Biomass's 2020 satellite product.</p>
       <figure><div class="frame"><img src="manavgat_karbon_emisyonu.png" alt="Burned area by severity class and estimated CO2 emissions"></div><figcaption><span class="fig-no">FIG. 6.1</span> CO₂ estimate using real satellite-derived biomass (±20% product accuracy).</figcaption></figure>
       <div class="callout">Estimated, not measured: burned area and biomass are real satellite data, but combustion completeness is still a literature-based assumption — hence the 2.38M–3.56M tonne range rather than one falsely precise number.</div>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="recovery">
     <div class="wrap reveal">
       <div class="eyebrow">07 · 2022 → 2024</div>
       <h2>Nature's return from the ashes</h2>
-      <p class="lede">Vegetation health (NBR) was tracked for three years, all symbolized on the <strong>same</strong> colour scale (-1 to 0.7) — using each year's own auto-stretched range would have let symbology differences masquerade as real recovery.</p>
-      <figure><div class="frame"><img src="manavgat_iyilesme_zaman_serisi.gif" alt="Animation of vegetation recovery from 2022 to 2024"></div><figcaption><span class="fig-no">FIG. 7.1</span> Year-over-year NBR comparison, brown to green.</figcaption></figure>
-      <div class="three-col">
-        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2022.png" alt="2022 vegetation condition"></div><figcaption>2022 — brown, fire-affected ground still dominant.</figcaption></figure>
-        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2023.png" alt="2023 vegetation condition"></div><figcaption>2023 — green cover expanding.</figcaption></figure>
-        <figure style="margin-top:0"><div class="frame"><img src="manavgat_iyilesme_2024.png" alt="2024 vegetation condition"></div><figcaption>2024 — greenest of the three years; recovery is slower in the highest-severity core.</figcaption></figure>
+      <p class="lede">Vegetation health (NBR) was tracked for three years, all symbolized on the <strong>same</strong> colour scale (-1 to 0.7) — using each year's own auto-stretched range would have let symbology differences masquerade as real recovery. Drag the slider to compare years directly.</p>
+      <div class="yearslide">
+        <div class="stack" id="yearStack" style="aspect-ratio:16/11">
+          <img class="active" data-year="2022" src="manavgat_iyilesme_2022.png" style="position:absolute;object-fit:cover;" alt="2022 vegetation condition">
+          <img data-year="2023" src="manavgat_iyilesme_2023.png" style="position:absolute;object-fit:cover;" alt="2023 vegetation condition">
+          <img data-year="2024" src="manavgat_iyilesme_2024.png" style="position:absolute;object-fit:cover;" alt="2024 vegetation condition">
+        </div>
+        <input type="range" id="yearRange" min="0" max="2" step="1" value="0" aria-label="Select recovery year">
+        <div class="yearlabels">
+          <span data-y="0" class="active">2022 — burn scar still dominant</span>
+          <span data-y="1">2023 — green cover expanding</span>
+          <span data-y="2">2024 — greenest of the three years</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="risk">
     <div class="wrap reveal">
       <div class="eyebrow fire">08 · Future Fire Risk Model</div>
       <h2>Built only from what held up</h2>
-      <p class="lede">Based on Section 4's validation, the model combines only <strong>aspect</strong> (50%) and <strong>vegetation density / fuel load</strong> (50%) — the two variables confirmed against real 2021 burn data. It covers the whole landscape, not just the historical burn scar, so it also scores risk in forest that hasn't burned yet.</p>
-      <figure><div class="frame"><img src="manavgat_risk_screenshot.png" alt="Future wildfire risk map based on aspect and fuel load"></div><figcaption class="fire"><span class="fig-no">FIG. 8.1</span> Risk classification, light yellow (low) to deep red (high). Version 4 — re-verified twice after methodology corrections.</figcaption><div class="credit-line">ArcGIS Pro — Map view, unique-values symbology over a topographic basemap.</div></figure>
+      <p class="lede">The model combines only <strong>aspect</strong> (50%) and <strong>vegetation density / fuel load</strong> (50%) — the two variables confirmed in Section 04. Toggle the layers below to see how they combine; the map covers the whole landscape, not just the historical burn scar.</p>
+      <div class="compare" style="margin-top:24px">
+        <div class="tabs">
+          <button class="tabbtn active" data-target="lyr-aspect">Aspect (50%)</button>
+          <button class="tabbtn" data-target="lyr-fuel">Fuel load / NDVI (50%)</button>
+          <button class="tabbtn" data-target="lyr-combined">Combined risk model</button>
+        </div>
+        <div class="stack" id="riskStack">
+          <img class="spacer" src="manavgat_layer_combined.png" style="opacity:0;position:static;" alt="">
+          <img id="lyr-aspect" class="active" src="manavgat_layer_aspect.png" alt="Aspect-only risk component, green low to red high">
+          <img id="lyr-fuel" src="manavgat_layer_fuel.png" alt="Vegetation density / fuel load risk component">
+          <img id="lyr-combined" src="manavgat_layer_combined.png" alt="Combined final risk model">
+        </div>
+      </div>
+      <figure>
+        <div class="frame"><img src="manavgat_risk_screenshot.png" alt="Future wildfire risk map based on aspect and fuel load, over a topographic basemap"></div>
+        <figcaption class="fire"><span class="fig-no">FIG. 8.1</span> Final model over a topographic basemap. Light yellow (low) to deep red (high). Version 4 — re-verified twice after methodology corrections.</figcaption>
+        <div class="credit-line">ArcGIS Pro — Map view, unique-values symbology.</div>
+      </figure>
     </div>
   </section>
 
@@ -392,27 +423,71 @@
 </footer>
 
 <script>
-  (function(){
-    var bar = document.getElementById('progress');
-    function onScroll(){
-      var h = document.documentElement;
-      var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-      bar.style.width = pct + '%';
-    }
-    document.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
+(function(){
+  var bar = document.getElementById('progress');
+  var nav = document.getElementById('floatnav');
+  var heroVid = document.getElementById('heroVideo');
+  var hero = document.querySelector('.hero');
 
-    if('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
-      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-    } else {
-      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+    nav.classList.toggle('show', h.scrollTop > hero.offsetHeight * 0.6);
+    if(heroVid){
+      var t = Math.min(h.scrollTop / hero.offsetHeight, 1);
+      heroVid.style.transform = 'scale(' + (1 + t*0.08) + ')';
     }
-  })();
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+    var sections = document.querySelectorAll('main section[id]');
+    var links = nav.querySelectorAll('a');
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href') === '#'+e.target.id); });
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ spy.observe(s); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  function wireTabs(containerSelector, stackId){
+    document.querySelectorAll(containerSelector + ' .tabbtn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll(containerSelector + ' .tabbtn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var target = btn.getAttribute('data-target');
+        document.querySelectorAll('#' + stackId + ' img').forEach(function(img){
+          if(img.id) img.classList.toggle('active', img.id === target);
+        });
+      });
+    });
+  }
+  wireTabs('#event .compare', 'compareStack');
+  wireTabs('#risk .compare', 'riskStack');
+
+  var range = document.getElementById('yearRange');
+  var yearImgs = document.querySelectorAll('#yearStack img[data-year]');
+  var yearLabels = document.querySelectorAll('.yearlabels span');
+  if(range){
+    range.addEventListener('input', function(){
+      var idx = parseInt(range.value, 10);
+      yearImgs.forEach(function(img, i){ img.classList.toggle('active', i === idx); });
+      yearLabels.forEach(function(l){ l.classList.toggle('active', parseInt(l.getAttribute('data-y'),10) === idx); });
+    });
+  }
+})();
 </script>
 
 </body>
