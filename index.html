@@ -61,12 +61,13 @@
   .hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;will-change:transform;}
   .hero .grade{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 900px 620px at 14% 8%, rgba(63,169,204,.4), transparent 62%),radial-gradient(ellipse 900px 700px at 90% 92%, rgba(184,70,31,.42), transparent 60%);mix-blend-mode:overlay;}
   .hero .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg, rgba(8,12,13,.3) 0%, rgba(8,12,13,.5) 50%, rgba(6,9,10,.94) 100%);}
-  .hero .content{position:relative;z-index:2;padding-bottom:40px;}
+  .hero .content{position:relative;z-index:2;padding-bottom:64px;max-width:660px;margin-inline:auto 0;}
+  @media (min-width:1100px){.hero .content{margin-left:max(24px,calc((100vw - 1040px)/2));}}
   .byline{font-family:"IBM Plex Mono",monospace;font-size:.86rem;font-weight:500;color:#d6dbd6;display:flex;flex-wrap:wrap;gap:7px 14px;align-items:center;margin-bottom:20px;opacity:0;animation:riseIn .8s .1s cubic-bezier(.2,.7,.2,1) forwards;}
   .byline .name{color:#ffffff;font-weight:700;}
   .byline .dot{opacity:.45;}
   .hero .eyebrow{color:#6fd0f2;font-size:.78rem;opacity:0;animation:riseIn .8s .22s cubic-bezier(.2,.7,.2,1) forwards;} .hero .eyebrow::before{background:#6fd0f2;}
-  .hero h1{font-size:clamp(3.4rem,11vw,8rem);font-weight:900;line-height:.9;letter-spacing:-.045em;margin-top:14px;color:#ffffff;text-transform:uppercase;text-shadow:0 6px 44px rgba(0,0,0,.55);opacity:0;animation:riseIn .9s .34s cubic-bezier(.2,.7,.2,1) forwards;}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;line-height:.94;letter-spacing:-.04em;margin-top:12px;color:#ffffff;text-transform:uppercase;text-shadow:0 6px 44px rgba(0,0,0,.55);opacity:0;animation:riseIn .9s .34s cubic-bezier(.2,.7,.2,1) forwards;}
   .hero h1 em{font-style:normal;font-weight:900;background:linear-gradient(96deg,#ffb066,#e0552a 60%);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .hero p.lede{max-width:60ch;font-size:1.22rem;line-height:1.55;color:#eef0eb;margin-top:18px;opacity:0;animation:riseIn .9s .48s cubic-bezier(.2,.7,.2,1) forwards;}
   .coord{font-family:"IBM Plex Mono",monospace;font-size:.8rem;font-weight:500;color:#b7c4bf;margin-top:18px;letter-spacing:.03em;opacity:0;animation:riseIn .9s .6s cubic-bezier(.2,.7,.2,1) forwards;}
@@ -74,8 +75,9 @@
   @media (prefers-reduced-motion: reduce){
     .byline,.hero .eyebrow,.hero h1,.hero p.lede,.coord{animation:none;opacity:1;}
   }
-  .scrolldown{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#c3ccc7;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2.2s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+  .scrolldown{position:absolute;bottom:20px;right:28px;left:auto;z-index:3;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#c3ccc7;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+  @media (max-width:640px){.scrolldown{display:none;}}
   .scrolldown .ln{width:1px;height:22px;background:linear-gradient(180deg,#c3ccc7,transparent);}
 
   .statline{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(231,235,230,.1);border-top:1px solid rgba(231,235,230,.1);}
@@ -238,18 +240,7 @@
       <div class="body-col" style="margin-top:22px">
         <p>The fire burned for ten days and became the largest forest fire in the history of the Turkish Republic. The burned-area figure below (60,128 ha) was not taken directly from a classifier's output — the raw classification initially reported 103,447 hectares, well above the 56,663–75,000 ha range reported by an independent satellite study and the Antalya Regional Forestry Directorate.</p>
       </div>
-      <div class="compare">
-        <div class="tabs">
-          <button class="tabbtn active" data-target="cmp-raw">Raw classification — 103,447 ha</button>
-          <button class="tabbtn" data-target="cmp-filtered">Filtered result — 60,128 ha</button>
-        </div>
-        <div class="stack" id="compareStack">
-          <img class="spacer" src="manavgat_raw_classification.png" style="opacity:0;position:static;" alt="">
-          <img id="cmp-raw" class="active" src="manavgat_raw_classification.png" alt="Raw dNBR classification showing scattered false-positive noise across Antalya province">
-          <img id="cmp-filtered" src="manavgat_filtered_classification.png" alt="Filtered classification showing only real fire patches over 100 hectares">
-        </div>
-      </div>
-      <div class="callout warn"><strong>What changed:</strong> most of the excess was scattered false-positive pixels across Antalya's urban core and farmland (cloud shadow, harvest signal), not fire. Keeping only contiguous patches over 100 hectares removed the noise while leaving the real fire complexes — including a few smaller, genuinely separate 2021 fires elsewhere in the province — intact.</div>
+      <div class="callout warn"><strong>What changed:</strong> most of the excess was scattered false-positive pixels across Antalya's urban core and farmland (cloud shadow, harvest signal), not fire. Keeping only contiguous patches over 100 hectares removed the noise and brought the total to 60,128 ha — within the independently reported range.</div>
     </div>
   </section>
 
@@ -480,7 +471,6 @@
       });
     });
   }
-  wireTabs('#event .compare', 'compareStack');
   wireTabs('#risk .compare', 'riskStack');
 
   // animated stat counters
